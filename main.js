@@ -2,6 +2,7 @@ function charNumber(str){
     const noSpaces = str.replaceAll(' ', '');
     return noSpaces.length;
 }
+//[\s\W]+
 
 function wordNumber(str){
     return str.trim()
