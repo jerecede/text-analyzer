@@ -4,6 +4,12 @@ function charNumber(str){
 }
 //[\s\W]+
 
+function charNumberRgx(str){
+    const noSpaces = str.replace(/[^\p{ASCII}]/gu, 'a');
+    noSpaces = str.replace(/[\s\W]+/, '');
+    return noSpaces.length;
+}
+
 function wordNumber(str){
     return str.trim()
     .replaceAll("’", ' ')
@@ -52,6 +58,26 @@ function wordCount(str){
     return wordCount;
 }
 
+//FUNZIONAAA
+function wordCountRgx(str){
+    let array = [];
+    let result = {};
+    const rgx = /[\w|\p{L}]+/gu;
+
+    while (array !== null) {
+        array = rgx.exec(str);
+        if (array !== null) {
+            word = array[0];
+            if (result[word]) {
+                result[word]++;
+            } else {
+                result[word] = 1;
+            }
+        }
+    }
+    return result;
+}
+
 const incipit = `Quel ramo del lago di Como, che volge a mezzogiorno, tra due
 catene non interrotte di monti, tutto a seni e a golfi, a seconda
 dello sporgere e del rientrare di quelli, vien, quasi a un tratto, a
@@ -86,13 +112,14 @@ per diradar l’uve, e alleggerire a’ contadini le fatiche della vendemmia`;
 // const cNumb = charNumber(incipit);
 // console.log(cNumb); //number
 
-
 // const wNumb = wordNumber(incipit);
 // console.log(wNumb); //number
-
 
 // const wCount = wordCount(incipit);
 // console.log(wCount); //{parola: numero di occorrenze}
 
-const wNumb = wordNumberRgx(incipit);
-console.log(wNumb); //number
+// const wNumb = wordNumberRgx(incipit);
+// console.log(wNumb); //number
+
+// const wCount = wordCountRgx(incipit);
+// console.log(wCount); //{parola: numero di occorrenze}
