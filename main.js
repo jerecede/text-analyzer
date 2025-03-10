@@ -1,22 +1,43 @@
-function charNumber(str){ //number
-    str = str.replace(/[\s\.\'\,\’\;\:]+/g, '');
-    console.log(str);
-    return str.length;
+function charNumber(str){
+    const noSpaces = str.replaceAll(' ', '');
+    // const noSpaces = str.replace(/[\s\.\,\;\:\'\’]+/g, '');
+    return noSpaces.length;
 }
 
-function wordNumber(str){ //number
-    return str.trim().split(/\s+/).length;
+function wordNumber(str){
+    return str.trim()
+    .replaceAll("’", ' ')
+    .replaceAll("\n", ' ')
+    .split(' ').length;
+    // return str.trim().split(/\s+/).length;
 }
 
-function wordCount(str){ //object
+function wordCount(str){
     wordCount = {};
-    arrayWords = str.trim().split(/\s+/);
-    arrayWords = arrayWords.map(s => s.replace(/[\.\,\;\:]+/g, ''));
+
+    arrayWords = str.trim()
+    .replaceAll("’", ' ')
+    .replaceAll("\n", ' ')
+    .replaceAll(",", '')
+    .replaceAll(";", '')
+    .replaceAll(":", '')
+    .replaceAll(".", '')
+    .split(' ');
+
+    const punctuation = ['.',',',':',';'];
+    
+    const arrayWords = str.plit('');
+
+    arrayWords.filter(c => !punctuation.includes(c))
+    .join('')
+    .replaceAll(",", ' ')
+    .replaceAll("\n", ' ')
+    .split(' ');
 
     for (let i = 0; i < arrayWords.length; i++) {
-        const word = arrayWords[i];
+        const word = arrayWords[i].toLowerCase();
         if(wordCount[word]){
-            wordCount[word] += 1;
+            wordCount[word]++;
         } else {
             wordCount[word] = 1;
         }
