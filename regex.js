@@ -30,3 +30,5 @@ console.log(testStr.match(rgx2));
 //MATCH usa questo
 
 //guardare github di andrea!!!
+
+//usa regex101.com

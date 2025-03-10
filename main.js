@@ -1,6 +1,5 @@
 function charNumber(str){
     const noSpaces = str.replaceAll(' ', '');
-    // const noSpaces = str.replace(/[\s\.\,\;\:\'\’]+/g, '');
     return noSpaces.length;
 }
 
@@ -10,6 +9,12 @@ function wordNumber(str){
     .replaceAll("\n", ' ')
     .split(' ').length;
     // return str.trim().split(/\s+/).length;
+}
+
+function wordNumberRgx(str){
+    const rgx = /\p{L}+/gu;
+    const arrayWords = str.match(rgx);
+    return arrayWords.length;
 }
 
 function wordCount(str){
@@ -24,15 +29,15 @@ function wordCount(str){
     .replaceAll(".", '')
     .split(' ');
 
-    const punctuation = ['.',',',':',';'];
+    // const punctuation = ['.',',',':',';'];
     
-    const arrayWords = str.plit('');
+    // const arrayWords = str.split('');
 
-    arrayWords.filter(c => !punctuation.includes(c))
-    .join('')
-    .replaceAll(",", ' ')
-    .replaceAll("\n", ' ')
-    .split(' ');
+    // arrayWords.filter(c => !punctuation.includes(c))
+    // .join('')
+    // .replaceAll(",", ' ')
+    // .replaceAll("\n", ' ')
+    // .split(' ');
 
     for (let i = 0; i < arrayWords.length; i++) {
         const word = arrayWords[i].toLowerCase();
@@ -77,13 +82,16 @@ donne del paese, accarezzavan di tempo in tempo le spalle a qualche marito, a
 qualche padre; e, sul finir dell’estate, non mancavan mai di spandersi nelle vigne,
 per diradar l’uve, e alleggerire a’ contadini le fatiche della vendemmia`;
 
-// const cNumb = charNumber(incipit)
+// const cNumb = charNumber(incipit);
 // console.log(cNumb); //number
 
 
-// const wNumb = wordNumber(incipit)
+// const wNumb = wordNumber(incipit);
 // console.log(wNumb); //number
 
 
-const wCount = wordCount(incipit)
-console.log(wCount); //{parola: numero di occorrenze}
+// const wCount = wordCount(incipit);
+// console.log(wCount); //{parola: numero di occorrenze}
+
+const wNumb = wordNumberRgx(incipit);
+console.log(wNumb); //number
