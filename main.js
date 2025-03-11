@@ -2,7 +2,6 @@ function charNumber(str){
     const noSpaces = str.replaceAll(' ', '');
     return noSpaces.length;
 }
-//[\s\W]+
 
 function charNumberRgx(str){
     const noSpaces = str.replace(/[^\p{ASCII}]/gu, 'a');

@@ -1,5 +1,5 @@
-const lista = `
-Mele;5;Supermercato
+const lista =
+`Mele;5;Supermercato
 Banane;3;Supermercato
 Arance;4;Supermercato
 Pane;2;Panetteria
@@ -14,59 +14,58 @@ Gamberetti;200;Pescheria
 Vino rosso;1;Enoteca
 Calamari;300;Pescheria`
 
-
 //1) creare una funzione che, partendo da lista, ritorni un array di oggetti: {nome: value, quantità: value, provenienza:value}
 
-// function firstFnct(str) {
-//     const rgx = /\n(?<nome>[\w|\s]+);(?<quantita>\d+);(?<provenienza>\w+)/g;
+function firstFnct(str) {
+    const rgx = /^(?<nome>.+);(?<quantita>\d+);(?<provenienza>.+)$/gm;
 
-//     let array = [];
-//     let result = [];
+    let match = [];
+    let result = [];
 
-//     while (array !== null) {
-//         array = rgx.exec(str);
-//         if (array !== null) {
-//             result.push(array['groups']);
-//         }
-//     }
+    while (match !== null) {
+        match = rgx.exec(str);
+        if (match !== null) {
+            result.push(match['groups']);
+        }
+    }
 
-//     return result;
-// }
+    return result;
+}
 
-// console.log(firstFnct(lista));
+console.log(firstFnct(lista));
 
 //2) creare una funzione che, partendo da lista, ritorni un array di oggetti che hanno come provenienza il supermercato: {nome: value, quantità: value, provenienza:value}
 
-// function secondFnct(str) {
-//     const rgx = /\n(?<nome>[\w|\s]+);(?<quantita>\d+);(?<provenienza>Supermercato)/g;
+function secondFnct(str) {
+    const rgx = /^(?<nome>.+);(?<quantita>\d+);(?<provenienza>Supermercato)$/gm;
 
-//     let array = [];
-//     let result = [];
+    let match = [];
+    let result = [];
 
-//     while (array !== null) {
-//         array = rgx.exec(str);
-//         if (array !== null) {
-//             result.push(array['groups']);
-//         }
-//     }
+    while (match !== null) {
+        match = rgx.exec(str);
+        if (match !== null) {
+            result.push(match['groups']);
+        }
+    }
 
-//     return result;
-// }
+    return result;
+}
 
-// console.log(secondFnct(lista));
+console.log(secondFnct(lista));
 
 //3) creare una funzione che, partendo da lista e da una stringa che indica la proveneienzz, ritorni un array di oggetti: {nome: value, quantità: value, provenienza:value}
 
 function thirdFnct(str, fromStr) {
-    const rgx = new RegExp(`\n(?<nome>[\\w|\\s]+);(?<quantita>\\d+);(?<provenienza>${fromStr})`, 'g');
+    const rgx = new RegExp(`^(?<nome>.+);(?<quantita>\\d+);(?<provenienza>${fromStr})$`, 'gmi'); //flag m guardo per linea, ^$ limiti per ogni linea e senza flag m farebbe tutta la stringa e non per linea
 
-    let array = [];
+    let match = [];
     let result = [];
 
-    while (array !== null) {
-        array = rgx.exec(str);
-        if (array !== null) {
-            result.push(array['groups']);
+    while (match !== null) {
+        match = rgx.exec(str);
+        if (match !== null) {
+            result.push(match['groups']);
         }
     }
 
@@ -76,3 +75,25 @@ function thirdFnct(str, fromStr) {
 console.log(thirdFnct(lista, 'Macelleria'));
 
 //4) creare una funzione che, partendo da lista e da un array di keys, ritorni un array di oggetti: {keys[0]: value, keys[1]: value, keys[2]: value}
+
+function fourthFnct(str, keys) {
+    const rgx = new RegExp(`^(?<${keys[0]}>.+);(?<${keys[1]}>\\d+);(?<${keys[2]}>.+)$`, 'gmi');
+
+    let match = [];
+    let result = [];
+
+    while (match !== null) {
+        match = rgx.exec(str);
+        if (match !== null) {
+            result.push(match['groups']);
+        }
+    }
+
+    // while ((match = rgx.exec(str)) !== null) {
+    //     result.push(match.groups);
+    // }
+
+    // return result;
+}
+
+console.log(fourthFnct(lista, ['pippo', 'pluto', 'paperino']));
